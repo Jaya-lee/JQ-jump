@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跳楼层</title>
+	<style>
+		header{
+			height: 300px;
+		}
+		nav{
+			width: 400px;
+			margin:0 auto;
+		}
+		ul{
+			list-style: none;
+		}
+		li{
+			float: left;
+			border: 1px solid red;
+		}
+		li a{
+			float: left;
+			text-decoration: none;
+			display: block;
+			font-size: 20px;
+			color: #000;
+			padding: 0 20px;
+			line-height: 50px;
+			background: pink;
+		}
+		.list1{
+			overflow: hidden;
+		}
+		.list2{
+			visibility: hidden;
+			position: fixed;
+			top:0;
+			left:50%;
+			margin-left: -200px;
+		}
+		section{
+			height: 1500px;
+			background: teal;
+		}
+		section article{
+			position: fixed;
+			left:3px;
+			display: none;
+		}
+		article >div{
+			width: 40px;
+			height: 40px;
+			color:#fff;
+			background: gray;
+			font-size: 14px;
+			border-bottom: 1px solid #fff;
+			text-align: center;
+			cursor:pointer;
+
+		}
+		.main>div{
+			width: 96%;
+			line-height:300px;
+			margin:0 auto;
+			font-size: 40px;
+			font-weight: bolder;
+
+		}
+		.main>div:nth-child(odd){
+			background: orange;
+		}
+		.main>div:nth-child(even){
+			background: hotpink;
+		}
+		footer{
+			height: 200px;
+			background: gray;
+		}
+		.back{
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			line-height: 50px;
+			text-decoration: none;
+			text-align: center;
+			background:pink;
+			color: #000;
+			position: fixed;
+			bottom: 50px;
+			right:20px;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<nav class="list1">
+			<ul>
+				<li><a href="#">手机</a></li>
+				<li><a href="#">平板</a></li>
+				<li><a href="#">电脑</a></li>
+				<li><a href="#">笔记本</a></li>
+			</ul>
+		</nav>
+		<nav class="list2">
+			<ul>
+				<li><a href="#">手机</a></li>
+				<li><a href="#">平板</a></li>
+				<li><a href="#">电脑</a></li>
+				<li><a href="#">笔记本</a></li>
+			</ul>
+		</nav>
+	</header>
+	<section>
+		<article>
+			<div>美丽人生</div>
+			<div>潮流酷玩</div>
+			<div>居家生活</div>
+			<div>打造爱巢</div>
+			<div>亲子时光</div>
+		</article>
+		<div class="main">
+			<div>美丽人生</div>
+			<div>潮流酷玩</div>
+			<div>居家生活</div>
+			<div>打造爱巢</div>
+			<div>亲子时光</div>
+		</div>
+	</section>
+	<footer></footer>
+	<a class="back"href="#">top</a>
+	<script src="jquery-3.1.1.js"></script>
+	<script>
+		$("article>div").click(function(){
+			var a =$(this).index()
+			var b=$(this).parent().siblings().find("div").eq(a).offset().top;
+			$("body").animate({"scrollTop":b},500);
+		})
+		$(document).scroll(function(){
+			var c=$(this).scrollTop();
+			if(c>150){
+				$(".back").fadeIn(200);
+				$(".list2").css("visibility","visible");
+			}else{
+				$(".back").fadeOut(200);
+				$(".list2").css("visibility","hidden");
+			}
+			if (c>400){
+				$("article").fadeIn(200);
+			}
+			else{
+				$("article").fadeOut(200);
+			}
+
+		})
+		$(".back").click(function(event){
+			event.preventDefault();
+			$("body").stop().animate({"scrollTop":0},1000);
+		})
+	</script>
+</body>
+</html>
